@@ -23,37 +23,37 @@ const PHONE   = 'tel:+919384501016';
 export default function TravelsWebsite() {
   const galleryItems = [
     { 
-      img: 'public/images/gallery/kanchipuram temple.jpg', 
+      img: '/images/gallery/kanchipuram_temple.jpg', 
       label: 'Kanchipuram Temple Travel',
       alt: 'Kailasanathar Temple architecture in Kanchipuram'
     },
     { 
-      img: 'public/images/gallery/chennai airport.jpg', 
+      img: '/images/gallery/chennai_airport.jpg', 
       label: 'Chennai Airport Pickup',
       alt: 'Travel car at Chennai International Airport'
     },
     { 
-      img: 'public/images/gallery/pondicherry.jpg', 
+      img: '/images/gallery/pondicherry.jpg', 
       label: 'Pondicherry Trip',
       alt: 'French colony and beaches of Pondicherry'
     },
     { 
-      img: 'public/images/gallery/kodaikanal.jpg', 
+      img: '/images/gallery/kodaikanal.jpg', 
       label: 'Kodaikanal Hill Trip',
       alt: 'Mist-covered hills of Kodaikanal'
     },
     { 
-      img: 'public/images/gallery/Ooty.jpg', 
+      img: '/images/gallery/Ooty.jpg', 
       label: 'Ooty Family Trip',
       alt: 'Tea gardens and mountain views of Ooty'
     },
     { 
-      img: 'public/images/gallery/rameshwaram.webp', 
+      img: '/images/gallery/rameshwaram.webp', 
       label: 'Rameswaram Temple Tour',
       alt: 'The iconic Pamban Bridge road in Rameswaram'
     },
     { 
-      img: 'public/images/gallery/madurai temple.jpg', 
+      img: '/images/gallery/madurai_temple.jpg', 
       label: 'Madurai Temple Tour',
       alt: 'Madurai Meenakshi Temple Tower View'
     },
