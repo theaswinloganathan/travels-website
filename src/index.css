@@ -432,86 +432,94 @@ section { padding: 5rem 0; }
   .mobile-toggle { display: flex; z-index: 1001; }
   .hide-mobile { display: none !important; }
   
-  /* Hero 3/4 Height Optimization */
+  /* Hero Mobile Fixes */
   .hero { 
-    min-height: auto !important;
-    height: 75vh !important; 
-    padding-top: 60px;
-    padding-bottom: 2rem;
-    display: flex;
-    align-items: center;
+    min-height: 75vh !important;
+    height: auto !important; 
+    padding-top: 90px !important;
+    padding-bottom: 3rem !important;
+    display: block !important;
   }
-  .hero-content { gap: 1.5rem; }
-  .hero-text { text-align: center; }
-  .hero-text h1 { font-size: 1.65rem !important; margin-bottom: 0.8rem; line-height: 1.2; }
-  .hero-text p { font-size: 0.9rem !important; margin-bottom: 1.2rem; opacity: 0.85; line-height: 1.5; }
-  .premium-badge { margin-bottom: 0.8rem; padding: 0.35rem 0.8rem; font-size: 0.72rem; }
-  .hero-trust-badges { margin-bottom: 1.2rem; gap: 0.5rem; }
-  .trust-item { padding: 0.25rem 0.6rem; font-size: 0.75rem; }
-  .hero-actions { gap: 0.8rem; margin-top: 0.5rem; }
-  .hero-actions .btn { padding: 0.8rem; font-size: 0.9rem; }
+  .hero-content { 
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+    padding: 0 20px !important;
+  }
+  .hero-text { 
+    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+  }
+  .hero-text h1 { 
+    font-size: 32px !important; 
+    margin-bottom: 0 !important;
+    line-height: 1.3 !important; 
+  }
+  .hero-text p { 
+    font-size: 16px !important; 
+    margin-bottom: 0 !important;
+    line-height: 1.6 !important;
+  }
+  .premium-badge { 
+    align-self: flex-start;
+    margin-bottom: 0 !important;
+  }
+  .hero-trust-badges { 
+    margin-bottom: 0 !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+  }
+  .hero-actions { 
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin-top: 5px !important;
+  }
+  .hero-actions .btn { 
+    width: 100% !important;
+    justify-content: center !important;
+  }
   
-  /* Contact Card Placement */
+  /* Contact Card Mobile Adjustment */
   .hero-contact-card { 
-    margin-top: 2rem !important; 
-    position: relative;
-    z-index: 10;
-    padding: 1.5rem 1.2rem;
-    box-shadow: var(--shadow-md);
+    margin-top: 10px !important; 
+    margin-bottom: 2rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    position: relative !important;
+    z-index: 1 !important;
   }
 
-  /* Gallery UI Improvements */
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-  }
-  .gallery-item {
-    height: 160px;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .gallery-item img {
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-  .gallery-item:active img, .gallery-item:hover img {
-    transform: scale(1.08);
-  }
-  
-  .gallery-fade-in {
-    animation: galleryFadeIn 0.4s ease forwards;
-  }
-  
-  @keyframes galleryFadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* Vehicle Section Spacing */
+  #vehicles {
+    margin-top: 0 !important;
+    padding-top: 4rem !important;
   }
 
   /* Compact Mobile Styles */
-  section { padding: 2.5rem 0; }
+  section { padding: 3.5rem 0; }
   .section-header { margin-bottom: 1.8rem; }
-  .section-title { font-size: 1.6rem; }
-  .section-subtitle { font-size: 0.75rem; }
+  .section-title { font-size: 1.8rem; }
+  .section-subtitle { font-size: 0.8rem; }
   
-  .v-img-wrapper { height: 160px; }
-  .v-content { padding: 1.2rem; }
-  .v-content h3 { font-size: 1.15rem; }
-  .v-specs { gap: 0.6rem; margin-bottom: 1rem; }
-  .v-footer { padding-top: 0.8rem; }
+  .v-img-wrapper { height: 180px; }
+  .v-content { padding: 1.4rem; }
+  .v-content h3 { font-size: 1.2rem; }
+  .v-specs { gap: 0.7rem; margin-bottom: 1.1rem; }
+  .v-footer { padding-top: 1rem; }
   
-  .route-card-new { padding: 1rem 1.2rem; }
-  .route-details h4 { font-size: 0.95rem; }
-  .route-details p { font-size: 0.8rem; }
+  .route-card-new { padding: 1.1rem 1.3rem; }
+  .route-details h4 { font-size: 1rem; }
+  .route-details p { font-size: 0.85rem; }
   
-  .feature-card-new { padding: 1.5rem 1.2rem; }
-  .feature-icon-new { width: 45px; height: 45px; margin-bottom: 1rem; }
-  .feature-card-new h4 { font-size: 1rem; }
+  .feature-card-new { padding: 1.8rem 1.4rem; }
+  .feature-icon-new { width: 50px; height: 50px; margin-bottom: 1.2rem; }
+  .feature-card-new h4 { font-size: 1.1rem; }
   
-  .fade-in, .scroll-reveal { 
-    animation: none !important; 
-    opacity: 1 !important; 
-    transform: none !important; 
-  }
-  .btn { padding: 0.9rem; width: 100%; justify-content: center; }
+  .btn { padding: 1rem; width: 100%; justify-content: center; }
   .btn-sm { font-size: 0.95rem; }
   
   .pickup-areas { margin-top: 2rem; padding: 1.5rem 1rem; }
