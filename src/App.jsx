@@ -97,11 +97,20 @@ export default function TravelsWebsite() {
   const [showAllRoutes, setShowAllRoutes] = useState(false);
   const [showAllFeatures, setShowAllFeatures] = useState(false);
   const [showAllGallery, setShowAllGallery] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onResize);
+    onResize(); // Initial check
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -118,6 +127,11 @@ export default function TravelsWebsite() {
     setIsMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Performance optimized gallery items
+  const activeGalleryItems = isMobile && !showAllGallery 
+    ? galleryItems.slice(0, 4) 
+    : galleryItems;
 
   return (
     <div className="main-wrapper">
@@ -153,6 +167,19 @@ export default function TravelsWebsite() {
 
       {/* Hero */}
       <header id="home" className="hero">
+        <div className="hero-bg-wrapper">
+          <img 
+            src="/images/hero/hero_tn_road.webp" 
+            alt="Tamil Nadu Road" 
+            fetchpriority="high"
+            className="hero-bg-img"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = '/images/hero/hero_tn_road.png';
+            }}
+          />
+          <div className="hero-overlay-gradient"></div>
+        </div>
         <div className="container">
           <div className="hero-content">
             <div className="hero-text">
@@ -241,8 +268,8 @@ export default function TravelsWebsite() {
             {vehicleList.map(v => (
               <div key={v.id} className="vehicle-card-premium">
                 <div className="v-img-wrapper">
-                  <img src={v.image} alt={v.name} loading="lazy" decoding="async"
-                    onError={e => { e.target.onerror = null; e.target.src = 'https://images.pexels.com/photos/3807386/pexels-photo-3807386.jpeg?auto=compress&cs=tinysrgb&w=800'; }} />
+                  <img src={v.image.replace('.png', '.webp')} alt={v.name} loading="lazy" decoding="async"
+                    onError={e => { e.target.onerror = null; e.target.src = v.image; }} />
                   <div className="v-tag">{v.tag}</div>
                 </div>
                 <div className="v-content">
@@ -281,7 +308,7 @@ export default function TravelsWebsite() {
               { title: 'Weekend Trips', img: 'https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=800', places: ['Pondicherry', 'Yercaud', 'Kodaikanal'] },
             ].map((p, idx) => (
               <div key={idx} className="package-card card-lift scroll-reveal">
-                <div className="p-img"><img src={p.img} alt={p.title} /></div>
+                <div className="p-img"><img src={p.img} alt={p.title} loading="lazy" decoding="async" /></div>
                 <div className="p-content">
                   <h3>{p.title}</h3>
                   <div className="p-places">
@@ -392,12 +419,16 @@ export default function TravelsWebsite() {
             <h2 className="section-title">Real Travel Moments in Tamil Nadu</h2>
           </div>
           <div className="gallery-grid">
-            {galleryItems.map((item, idx) => (
-              <div key={idx} className={`gallery-item scroll-reveal ${!showAllGallery && idx >= 4 ? 'mobile-hidden' : 'gallery-fade-in'}`}>
-                <img src={item.img} alt={item.alt} loading="lazy" 
+            {activeGalleryItems.map((item, idx) => (
+              <div key={idx} className="gallery-item scroll-reveal gallery-fade-in">
+                <img 
+                  src={item.img.replace('.jpg', '.webp').replace('.png', '.webp')} 
+                  alt={item.alt} 
+                  loading="lazy" 
+                  decoding="async"
                   onError={(e) => { 
                     e.target.onerror = null;
-                    e.target.src = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800';
+                    e.target.src = item.img;
                   }} />
                 <div className="gallery-overlay">
                   <span>{item.label}</span>
