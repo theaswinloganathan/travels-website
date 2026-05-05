@@ -425,11 +425,39 @@ section { padding: 5rem 0; }
 
 @media (max-width: 768px) {
   section { padding: 3.5rem 0; }
-  .nav-links { position: fixed; top: 0; right: -280px; width: 260px; height: 100vh; background: var(--navy); flex-direction: column; gap: 0; padding: 5rem 0 2rem; transition: right 0.3s ease; z-index: 999; box-shadow: -4px 0 20px rgba(0,0,0,0.2); overflow-y: auto; }
+  .nav-links { 
+    position: fixed; 
+    top: 0; 
+    right: -280px; 
+    width: 260px; 
+    height: 100vh; 
+    background: var(--navy); 
+    flex-direction: column; 
+    gap: 0; 
+    padding: 5rem 0 2rem; 
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    z-index: 1100; 
+    box-shadow: -10px 0 30px rgba(0,0,0,0.3); 
+    overflow-y: auto; 
+  }
   .nav-links.mobile-active { right: 0; }
-  .nav-links a { color: rgba(255,255,255,0.85) !important; font-size: 1.1rem; padding: 1rem 2rem; display: block; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .nav-links a { 
+    color: rgba(255,255,255,0.85) !important; 
+    font-size: 1.1rem; 
+    padding: 1.2rem 2rem; 
+    display: block; 
+    border-bottom: 1px solid rgba(255,255,255,0.06); 
+    transition: background 0.2s;
+  }
   .nav-links a:hover { color: var(--sky) !important; background: rgba(255,255,255,0.05); }
-  .mobile-toggle { display: flex; z-index: 1001; }
+  .mobile-toggle { 
+    display: flex; 
+    position: relative;
+    z-index: 1101; 
+    background: transparent;
+    border: none;
+    padding: 8px;
+  }
   .hide-mobile { display: none !important; }
   
   /* Hero Mobile Fixes */
