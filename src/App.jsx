@@ -17,53 +17,81 @@ const vehicleList = [
     image: '/images/vehicles/white_force_traveller.png' },
 ];
 
+const galleryItems = [
+  { 
+    img: '/images/gallery/kanchipuram_temple.jpg', 
+    label: 'Kanchipuram Temple Travel',
+    alt: 'Kailasanathar Temple architecture in Kanchipuram'
+  },
+  { 
+    img: '/images/gallery/chennai_airport.jpg', 
+    label: 'Chennai Airport Pickup',
+    alt: 'Travel car at Chennai International Airport'
+  },
+  { 
+    img: '/images/gallery/pondicherry.jpg', 
+    label: 'Pondicherry Trip',
+    alt: 'French colony and beaches of Pondicherry'
+  },
+  { 
+    img: '/images/gallery/kodaikanal.jpg', 
+    label: 'Kodaikanal Hill Trip',
+    alt: 'Mist-covered hills of Kodaikanal'
+  },
+  { 
+    img: '/images/gallery/Ooty.jpg', 
+    label: 'Ooty Family Trip',
+    alt: 'Tea gardens and mountain views of Ooty'
+  },
+  { 
+    img: '/images/gallery/rameshwaram.webp', 
+    label: 'Rameswaram Temple Tour',
+    alt: 'The iconic Pamban Bridge road in Rameswaram'
+  },
+  { 
+    img: '/images/gallery/madurai_temple.jpg', 
+    label: 'Madurai Temple Tour',
+    alt: 'Madurai Meenakshi Temple Tower View'
+  },
+  { 
+    img: '/images/vehicles/white_force_traveller.png', 
+    label: 'Tempo Traveller Group Trip',
+    alt: 'White premium Tempo Traveller for group travel'
+  }
+];
+
+const routes = [
+  { from: 'Kanchipuram', to: 'Chennai Airport', type: 'Local Pickup/Drop' },
+  { from: 'Kanchipuram', to: 'Pondicherry', type: 'ECR Coastal Road' },
+  { from: 'Kanchipuram', to: 'Tirupati', type: 'Temple Trip' },
+  { from: 'Kanchipuram', to: 'Bangalore', type: 'Inter-State' },
+  { from: 'Kanchipuram', to: 'Kodaikanal', type: 'Hill Station Tour' },
+  { from: 'Kanchipuram', to: 'Ooty', type: 'Hill Station Tour' },
+  { from: 'Kanchipuram', to: 'Rameswaram', type: 'Spiritual Tour' },
+  { from: 'Kanchipuram', to: 'Madurai', type: 'Heritage Tour' },
+  { from: 'Kanchipuram', to: 'Mahabalipuram', type: 'Coastal Heritage' },
+  { from: 'Kanchipuram', to: 'Yercaud', type: 'Hill Station' },
+  { from: 'Kanchipuram', to: 'Trichy', type: 'Central TN' },
+  { from: 'Kanchipuram', to: 'Thanjavur', type: 'Heritage Tour' },
+];
+
+const features = [
+  { title: 'Tamil Nadu Experienced Drivers', icon: <Zap />, desc: 'Local experts with deep knowledge of TN roads.' },
+  { title: 'Hill Station Driving Experience', icon: <ShieldCheck />, desc: 'Safe & skilled drivers for Ooty, Kodaikanal, etc.' },
+  { title: 'Doorstep Pickup & Drop', icon: <MapPin />, desc: 'Convenient pickup from your home or office.' },
+  { title: 'Ladies Safety Assurance', icon: <ShieldCheck />, desc: 'Verified drivers & tracking for safe female travel.' },
+  { title: 'On-Time Pickup Guarantee', icon: <Clock />, desc: 'Punctuality is our core promise.' },
+  { title: 'Clean & Safe Family Travel', icon: <ShieldCheck />, desc: 'Fully sanitized premium white vehicles.' },
+  { title: 'Group Travel Experts', icon: <Users />, desc: 'Perfectly managed tours for large families & groups.' },
+  { title: 'Long Distance Expertise', icon: <Navigation />, desc: 'Comfortable & safe driving for 500+ km trips.' },
+  { title: 'Affordable Packages', icon: <Navigation />, desc: 'Best rates for all Tamil Nadu tours.' },
+  { title: '24/7 Support', icon: <Phone />, desc: 'Round the clock assistance for your journey.' },
+];
+
 const WA_LINK = 'https://wa.me/919384501016?text=Hi%20I%20want%20to%20book%20a%20car%20or%20van';
 const PHONE   = 'tel:+919384501016';
 
 export default function TravelsWebsite() {
-  const galleryItems = [
-    { 
-      img: '/images/gallery/kanchipuram_temple.jpg', 
-      label: 'Kanchipuram Temple Travel',
-      alt: 'Kailasanathar Temple architecture in Kanchipuram'
-    },
-    { 
-      img: '/images/gallery/chennai_airport.jpg', 
-      label: 'Chennai Airport Pickup',
-      alt: 'Travel car at Chennai International Airport'
-    },
-    { 
-      img: '/images/gallery/pondicherry.jpg', 
-      label: 'Pondicherry Trip',
-      alt: 'French colony and beaches of Pondicherry'
-    },
-    { 
-      img: '/images/gallery/kodaikanal.jpg', 
-      label: 'Kodaikanal Hill Trip',
-      alt: 'Mist-covered hills of Kodaikanal'
-    },
-    { 
-      img: '/images/gallery/Ooty.jpg', 
-      label: 'Ooty Family Trip',
-      alt: 'Tea gardens and mountain views of Ooty'
-    },
-    { 
-      img: '/images/gallery/rameshwaram.webp', 
-      label: 'Rameswaram Temple Tour',
-      alt: 'The iconic Pamban Bridge road in Rameswaram'
-    },
-    { 
-      img: '/images/gallery/madurai_temple.jpg', 
-      label: 'Madurai Temple Tour',
-      alt: 'Madurai Meenakshi Temple Tower View'
-    },
-    { 
-      img: '/images/vehicles/white_force_traveller.png', 
-      label: 'Tempo Traveller Group Trip',
-      alt: 'White premium Tempo Traveller for group travel'
-    }
-  ];
-
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showAllRoutes, setShowAllRoutes] = useState(false);
@@ -91,34 +119,6 @@ export default function TravelsWebsite() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const routes = [
-    { from: 'Kanchipuram', to: 'Chennai Airport', type: 'Local Pickup/Drop' },
-    { from: 'Kanchipuram', to: 'Pondicherry', type: 'ECR Coastal Road' },
-    { from: 'Kanchipuram', to: 'Tirupati', type: 'Temple Trip' },
-    { from: 'Kanchipuram', to: 'Bangalore', type: 'Inter-State' },
-    { from: 'Kanchipuram', to: 'Kodaikanal', type: 'Hill Station Tour' },
-    { from: 'Kanchipuram', to: 'Ooty', type: 'Hill Station Tour' },
-    { from: 'Kanchipuram', to: 'Rameswaram', type: 'Spiritual Tour' },
-    { from: 'Kanchipuram', to: 'Madurai', type: 'Heritage Tour' },
-    { from: 'Kanchipuram', to: 'Mahabalipuram', type: 'Coastal Heritage' },
-    { from: 'Kanchipuram', to: 'Yercaud', type: 'Hill Station' },
-    { from: 'Kanchipuram', to: 'Trichy', type: 'Central TN' },
-    { from: 'Kanchipuram', to: 'Thanjavur', type: 'Heritage Tour' },
-  ];
-
-  const features = [
-    { title: 'Tamil Nadu Experienced Drivers', icon: <Zap />, desc: 'Local experts with deep knowledge of TN roads.' },
-    { title: 'Hill Station Driving Experience', icon: <ShieldCheck />, desc: 'Safe & skilled drivers for Ooty, Kodaikanal, etc.' },
-    { title: 'Doorstep Pickup & Drop', icon: <MapPin />, desc: 'Convenient pickup from your home or office.' },
-    { title: 'Ladies Safety Assurance', icon: <ShieldCheck />, desc: 'Verified drivers & tracking for safe female travel.' },
-    { title: 'On-Time Pickup Guarantee', icon: <Clock />, desc: 'Punctuality is our core promise.' },
-    { title: 'Clean & Safe Family Travel', icon: <ShieldCheck />, desc: 'Fully sanitized premium white vehicles.' },
-    { title: 'Group Travel Experts', icon: <Users />, desc: 'Perfectly managed tours for large families & groups.' },
-    { title: 'Long Distance Expertise', icon: <Navigation />, desc: 'Comfortable & safe driving for 500+ km trips.' },
-    { title: 'Affordable Packages', icon: <Navigation />, desc: 'Best rates for all Tamil Nadu tours.' },
-    { title: '24/7 Support', icon: <Phone />, desc: 'Round the clock assistance for your journey.' },
-  ];
-
   return (
     <div className="main-wrapper">
       {/* Floating WhatsApp */}
@@ -134,7 +134,7 @@ export default function TravelsWebsite() {
             {['home','about','vehicles','packages','services','gallery','routes','contact'].map(id => (
               <a key={id} href={`#${id}`}
                 onClick={e => { e.preventDefault(); goTo(id); }}
-                className={['packages', 'services', 'gallery'].includes(id) ? 'hide-mobile-nav' : ''}
+                className={['packages', 'services'].includes(id) ? 'hide-mobile-nav' : ''}
               >
                 {id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
