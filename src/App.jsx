@@ -253,7 +253,10 @@ export default function TravelsWebsite() {
                   </div>
                   <div className="v-footer">
                     <div className="v-price"><span>Starting from</span><h4>{v.price} /km</h4></div>
-                    <button className="btn btn-sky btn-sm" onClick={() => goTo('home')}>Book Now</button>
+                    <button className="btn btn-sky btn-sm" onClick={() => {
+                      const msg = `Hi Royal Travels, I want to book a ${v.name} (${v.capacity}). Please provide more details.`;
+                      window.open(`https://wa.me/919384501016?text=${encodeURIComponent(msg)}`, '_blank');
+                    }}>Book Now</button>
                   </div>
                 </div>
               </div>
