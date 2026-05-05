@@ -381,7 +381,7 @@ export default function TravelsWebsite() {
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="fade-in hide-mobile">
+      <section id="gallery" className="fade-in">
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">Gallery</span>
@@ -389,7 +389,7 @@ export default function TravelsWebsite() {
           </div>
           <div className="gallery-grid">
             {galleryItems.map((item, idx) => (
-              <div key={idx} className="gallery-item scroll-reveal">
+              <div key={idx} className={`gallery-item scroll-reveal ${!showAllGallery && idx >= 4 ? 'mobile-hidden' : 'gallery-fade-in'}`}>
                 <img src={item.img} alt={item.alt} loading="lazy" 
                   onError={(e) => { 
                     e.target.onerror = null;
@@ -400,6 +400,11 @@ export default function TravelsWebsite() {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="view-more-container mobile-only" style={{ marginTop: '2rem' }}>
+            <button className="btn btn-outline w-100" onClick={() => setShowAllGallery(!showAllGallery)}>
+              {showAllGallery ? 'Show Less' : 'View More Gallery'}
+            </button>
           </div>
         </div>
       </section>
