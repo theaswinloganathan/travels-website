@@ -442,36 +442,89 @@ section { padding: 5rem 0; }
   .contact-card-header h3 { font-size: 1.3rem; }
   .contact-btn-wa, .contact-btn-call { font-size: 1rem; padding: 1rem; }
   
-  /* Mobile Performance & Visibility */
-  .vehicles-grid, .packages-grid, .routes-grid-new, .services-grid-premium, .testimonials-grid { 
+  .features-grid, .vehicles-grid, .packages-grid, .routes-grid-new, .services-grid-premium, .testimonials-grid { 
     grid-template-columns: 1fr; 
-    gap: 1.5rem;
-    padding: 0 0.5rem;
+    gap: 1.2rem;
+    padding: 0;
   }
   .feature-card-new, .vehicle-card-premium, .package-card, .route-card-new, .testimonial-card {
-    margin: 0 5px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0, 31, 63, 0.1);
+    margin: 0;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 31, 63, 0.08);
   }
+  
+  /* Compact Mobile Styles */
+  section { padding: 2.5rem 0; }
+  .section-header { margin-bottom: 1.8rem; }
+  .section-title { font-size: 1.6rem; }
+  .section-subtitle { font-size: 0.75rem; }
+  
+  .v-img-wrapper { height: 160px; }
+  .v-content { padding: 1.2rem; }
+  .v-content h3 { font-size: 1.15rem; }
+  .v-specs { gap: 0.6rem; margin-bottom: 1rem; }
+  .v-footer { padding-top: 0.8rem; }
+  
+  .route-card-new { padding: 1rem 1.2rem; }
+  .route-details h4 { font-size: 0.95rem; }
+  .route-details p { font-size: 0.8rem; }
+  
+  .feature-card-new { padding: 1.5rem 1.2rem; }
+  .feature-icon-new { width: 45px; height: 45px; margin-bottom: 1rem; }
+  .feature-card-new h4 { font-size: 1rem; }
+  
   .fade-in, .scroll-reveal { 
     animation: none !important; 
     opacity: 1 !important; 
     transform: none !important; 
   }
-  .btn { padding: 1rem; }
+  .btn { padding: 0.9rem; width: 100%; justify-content: center; }
+  .btn-sm { font-size: 0.95rem; }
   
-  .features-grid { grid-template-columns: 1fr; }
-  .v-img-wrapper { height: 210px; }
-  .p-img { height: 210px; }
+  .pickup-areas { margin-top: 2rem; padding: 1.5rem 1rem; }
+  .pickup-areas h4 { font-size: 1rem; margin-bottom: 1rem; }
+  .area-tags { gap: 0.6rem; }
+  .area-tag { padding: 0.45rem 0.9rem; font-size: 0.82rem; }
+
   .floating-whatsapp { width: 50px; height: 50px; bottom: 1rem; right: 1rem; }
+
+  /* Section Reordering on Mobile */
+  .main-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero { order: 1; }
+  #vehicles { order: 2; }
+  #routes { order: 3; }
+  #about { order: 4; }
+  #packages, #services, #testimonials, #gallery { display: none !important; }
+  .footer { order: 5; }
+
+  /* Utility classes for truncation */
+  .mobile-hidden { display: none !important; }
+  .mobile-only { display: block !important; }
+  .hide-mobile-nav { display: none !important; }
+  
+  .view-more-container {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--sky);
+    color: var(--sky);
+  }
 }
 
 @media (max-width: 400px) {
-  .hero-text h1 { font-size: 1.65rem; }
-  .features-grid { grid-template-columns: 1fr; }
+  .hero-text h1 { font-size: 1.6rem; }
   .hero-contact-card { padding: 1.2rem; }
-  .container { padding: 0 1rem; }
-  .btn { padding: 0.75rem 1.4rem; font-size: 0.88rem; }
-  .contact-btn-wa, .contact-btn-call { font-size: 0.95rem; padding: 0.9rem; }
-  .contact-info-value { font-size: 0.85rem; }
+  .container { padding: 0 1.2rem; }
+}
+
+.mobile-only { display: none; }
+.hide-mobile { } /* Handled by display:none in 768px if needed, but using existing hide-mobile */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
 }

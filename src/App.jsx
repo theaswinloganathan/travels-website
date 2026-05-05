@@ -66,6 +66,8 @@ export default function TravelsWebsite() {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showAllRoutes, setShowAllRoutes] = useState(false);
+  const [showAllFeatures, setShowAllFeatures] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
@@ -88,8 +90,36 @@ export default function TravelsWebsite() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const routes = [
+    { from: 'Kanchipuram', to: 'Chennai Airport', type: 'Local Pickup/Drop' },
+    { from: 'Kanchipuram', to: 'Pondicherry', type: 'ECR Coastal Road' },
+    { from: 'Kanchipuram', to: 'Tirupati', type: 'Temple Trip' },
+    { from: 'Kanchipuram', to: 'Bangalore', type: 'Inter-State' },
+    { from: 'Kanchipuram', to: 'Kodaikanal', type: 'Hill Station Tour' },
+    { from: 'Kanchipuram', to: 'Ooty', type: 'Hill Station Tour' },
+    { from: 'Kanchipuram', to: 'Rameswaram', type: 'Spiritual Tour' },
+    { from: 'Kanchipuram', to: 'Madurai', type: 'Heritage Tour' },
+    { from: 'Kanchipuram', to: 'Mahabalipuram', type: 'Coastal Heritage' },
+    { from: 'Kanchipuram', to: 'Yercaud', type: 'Hill Station' },
+    { from: 'Kanchipuram', to: 'Trichy', type: 'Central TN' },
+    { from: 'Kanchipuram', to: 'Thanjavur', type: 'Heritage Tour' },
+  ];
+
+  const features = [
+    { title: 'Tamil Nadu Experienced Drivers', icon: <Zap />, desc: 'Local experts with deep knowledge of TN roads.' },
+    { title: 'Hill Station Driving Experience', icon: <ShieldCheck />, desc: 'Safe & skilled drivers for Ooty, Kodaikanal, etc.' },
+    { title: 'Doorstep Pickup & Drop', icon: <MapPin />, desc: 'Convenient pickup from your home or office.' },
+    { title: 'Ladies Safety Assurance', icon: <ShieldCheck />, desc: 'Verified drivers & tracking for safe female travel.' },
+    { title: 'On-Time Pickup Guarantee', icon: <Clock />, desc: 'Punctuality is our core promise.' },
+    { title: 'Clean & Safe Family Travel', icon: <ShieldCheck />, desc: 'Fully sanitized premium white vehicles.' },
+    { title: 'Group Travel Experts', icon: <Users />, desc: 'Perfectly managed tours for large families & groups.' },
+    { title: 'Long Distance Expertise', icon: <Navigation />, desc: 'Comfortable & safe driving for 500+ km trips.' },
+    { title: 'Affordable Packages', icon: <Navigation />, desc: 'Best rates for all Tamil Nadu tours.' },
+    { title: '24/7 Support', icon: <Phone />, desc: 'Round the clock assistance for your journey.' },
+  ];
+
   return (
-    <div>
+    <div className="main-wrapper">
       {/* Floating WhatsApp */}
       <a href={WA_LINK} target="_blank" rel="noreferrer" className="floating-whatsapp" aria-label="WhatsApp">
         <MessageCircle size={28} />
@@ -102,7 +132,9 @@ export default function TravelsWebsite() {
           <div className={`nav-links${isMenuOpen ? ' mobile-active' : ''}`}>
             {['home','about','vehicles','packages','services','gallery','routes','contact'].map(id => (
               <a key={id} href={`#${id}`}
-                onClick={e => { e.preventDefault(); goTo(id); }}>
+                onClick={e => { e.preventDefault(); goTo(id); }}
+                className={['packages', 'services', 'gallery'].includes(id) ? 'hide-mobile-nav' : ''}
+              >
                 {id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
             ))}
@@ -180,24 +212,20 @@ export default function TravelsWebsite() {
             <h2 className="section-title">Experience Premium Travel</h2>
           </div>
           <div className="features-grid">
-            {[
-              { title: 'Tamil Nadu Experienced Drivers', icon: <Zap />, desc: 'Local experts with deep knowledge of TN roads.' },
-              { title: 'Hill Station Driving Experience', icon: <ShieldCheck />, desc: 'Safe & skilled drivers for Ooty, Kodaikanal, etc.' },
-              { title: 'Doorstep Pickup & Drop', icon: <MapPin />, desc: 'Convenient pickup from your home or office.' },
-              { title: 'Ladies Safety Assurance', icon: <ShieldCheck />, desc: 'Verified drivers & tracking for safe female travel.' },
-              { title: 'On-Time Pickup Guarantee', icon: <Clock />, desc: 'Punctuality is our core promise.' },
-              { title: 'Clean & Safe Family Travel', icon: <ShieldCheck />, desc: 'Fully sanitized premium white vehicles.' },
-              { title: 'Group Travel Experts', icon: <Users />, desc: 'Perfectly managed tours for large families & groups.' },
-              { title: 'Long Distance Expertise', icon: <Navigation />, desc: 'Comfortable & safe driving for 500+ km trips.' },
-              { title: 'Affordable Packages', icon: <Navigation />, desc: 'Best rates for all Tamil Nadu tours.' },
-              { title: '24/7 Support', icon: <Phone />, desc: 'Round the clock assistance for your journey.' },
-            ].map((f, i) => (
-              <div key={i} className="feature-card-new card-lift scroll-reveal">
+            {features.slice(0, showAllFeatures ? features.length : 10).map((f, i) => (
+              <div key={i} className={`feature-card-new card-lift scroll-reveal ${!showAllFeatures && i >= 4 ? 'mobile-hidden' : ''}`}>
                 <div className="feature-icon-new">{f.icon}</div>
                 <h4>{f.title}</h4><p>{f.desc}</p>
               </div>
             ))}
           </div>
+          {!showAllFeatures && (
+            <div className="view-more-container mobile-only">
+              <button className="btn btn-outline w-100" onClick={() => setShowAllFeatures(true)}>
+                View More <ChevronRight size={17} />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -234,7 +262,7 @@ export default function TravelsWebsite() {
       </section>
 
       {/* Tourist Packages Section */}
-      <section id="packages" className="fade-in">
+      <section id="packages" className="fade-in hide-mobile">
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">Special Tours</span>
@@ -273,21 +301,8 @@ export default function TravelsWebsite() {
             <h2 className="section-title">Most Popular Routes</h2>
           </div>
           <div className="routes-grid-new">
-            {[
-              { from: 'Kanchipuram', to: 'Chennai Airport', type: 'Local Pickup/Drop' },
-              { from: 'Kanchipuram', to: 'Pondicherry', type: 'ECR Coastal Road' },
-              { from: 'Kanchipuram', to: 'Tirupati', type: 'Temple Trip' },
-              { from: 'Kanchipuram', to: 'Bangalore', type: 'Inter-State' },
-              { from: 'Kanchipuram', to: 'Kodaikanal', type: 'Hill Station Tour' },
-              { from: 'Kanchipuram', to: 'Ooty', type: 'Hill Station Tour' },
-              { from: 'Kanchipuram', to: 'Rameswaram', type: 'Spiritual Tour' },
-              { from: 'Kanchipuram', to: 'Madurai', type: 'Heritage Tour' },
-              { from: 'Kanchipuram', to: 'Mahabalipuram', type: 'Coastal Heritage' },
-              { from: 'Kanchipuram', to: 'Yercaud', type: 'Hill Station' },
-              { from: 'Kanchipuram', to: 'Trichy', type: 'Central TN' },
-              { from: 'Kanchipuram', to: 'Thanjavur', type: 'Heritage Tour' },
-            ].map((r, i) => (
-              <div key={i} className="route-card-new card-lift scroll-reveal" onClick={() => goTo('home')}>
+            {routes.slice(0, showAllRoutes ? routes.length : 12).map((r, i) => (
+              <div key={i} className={`route-card-new card-lift scroll-reveal ${!showAllRoutes && i >= 4 ? 'mobile-hidden' : ''}`} onClick={() => goTo('home')}>
                 <div className="route-dot"></div>
                 <div className="route-details"><h4>{r.from} → {r.to}</h4><p>{r.type}</p></div>
                 <ArrowRight className="route-arrow" size={17} />
@@ -295,6 +310,14 @@ export default function TravelsWebsite() {
             ))}
           </div>
           
+          {!showAllRoutes && (
+            <div className="view-more-container mobile-only" style={{ marginTop: '1.5rem' }}>
+              <button className="btn btn-outline w-100" onClick={() => setShowAllRoutes(true)}>
+                View More Routes <ChevronRight size={17} />
+              </button>
+            </div>
+          )}
+
           <div className="pickup-areas scroll-reveal">
             <h4>Major Pickup Areas:</h4>
             <div className="area-tags">
@@ -307,7 +330,7 @@ export default function TravelsWebsite() {
       </section>
 
       {/* Services */}
-      <section id="services" style={{ background: 'var(--navy)', color: 'var(--white)' }}>
+      <section id="services" className="hide-mobile" style={{ background: 'var(--navy)', color: 'var(--white)' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle" style={{ color: 'var(--gold)' }}>Services</span>
@@ -335,7 +358,7 @@ export default function TravelsWebsite() {
       </section>
 
       {/* Testimonials */}
-      <section>
+      <section className="hide-mobile">
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">Reviews</span>
@@ -358,7 +381,7 @@ export default function TravelsWebsite() {
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="fade-in">
+      <section id="gallery" className="fade-in hide-mobile">
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">Gallery</span>
