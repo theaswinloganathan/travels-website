@@ -68,6 +68,7 @@ export default function TravelsWebsite() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showAllRoutes, setShowAllRoutes] = useState(false);
   const [showAllFeatures, setShowAllFeatures] = useState(false);
+  const [showAllGallery, setShowAllGallery] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
