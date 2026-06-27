@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Car, Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -27,8 +28,7 @@ const Navbar = () => {
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
         <a href="#home" className="logo">
-          <Car size={32} className="logo-icon" />
-          <span>Royal Travels</span>
+          <img src={logoImg} alt="Royal Travels Kanchipuram" className="logo-img" />
         </a>
 
         <div className={`nav-links ${isOpen ? 'open' : ''}`}>

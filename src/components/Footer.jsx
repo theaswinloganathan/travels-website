@@ -1,5 +1,6 @@
 import React from 'react';
-import { Car, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 import './Footer.css';
 
 const Footer = () => {
@@ -10,9 +11,8 @@ const Footer = () => {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <div className="logo white">
-              <Car size={32} />
-              <span>Royal Travels</span>
+            <div className="footer-logo-wrap">
+              <img src={logoImg} alt="Royal Travels Kanchipuram" className="logo-img footer-logo-img" />
             </div>
             <p>Your trusted partner for comfortable and safe travel experiences. We provide premium car and van rentals for all your needs.</p>
             <div className="social-links">
