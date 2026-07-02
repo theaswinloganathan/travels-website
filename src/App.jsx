@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import {
   Car, Users, Clock, ShieldCheck, MapPin, Phone, Mail,
-  MessageCircle, CheckCircle2, ChevronRight, ChevronLeft, Plane, Home,
+  CheckCircle2, ChevronRight, ChevronLeft, Plane, Home,
   Briefcase, Star, Navigation, ArrowRight, Menu, X,
-  Gem, Zap, Heart
+  Gem, Zap, Heart, Search, Compass, Mountain, Sun, Trees, Sparkles, Filter, Calendar, Umbrella, Landmark
 } from 'lucide-react';
+
+const WhatsAppIcon = ({ size = 24, className = '' }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+);
 
 const vehicleList = [
   { id: 1, name: 'White Sedan Car', capacity: '4 Seater', bestFor: 'Swift Dzire / Etios', price: '₹12', tag: 'Sedan',
@@ -64,19 +77,63 @@ const galleryItems = [
   }
 ];
 
+const routeCategoriesList = [
+  'All', 'Temple Tours', 'Hill Stations', 'Beach', 'Heritage', 'Nature',
+  'Weekend Trips', 'Airport Transfer', 'Inter-State', 'Family Trips', 'Pilgrimage', 'Adventure'
+];
+
 const routes = [
-  { from: 'Kanchipuram', to: 'Chennai Airport', type: 'Local Pickup/Drop' },
-  { from: 'Kanchipuram', to: 'Pondicherry', type: 'ECR Coastal Road' },
-  { from: 'Kanchipuram', to: 'Tirupati', type: 'Temple Trip' },
-  { from: 'Kanchipuram', to: 'Bangalore', type: 'Inter-State' },
-  { from: 'Kanchipuram', to: 'Kodaikanal', type: 'Hill Station Tour' },
-  { from: 'Kanchipuram', to: 'Ooty', type: 'Hill Station Tour' },
-  { from: 'Kanchipuram', to: 'Rameswaram', type: 'Spiritual Tour' },
-  { from: 'Kanchipuram', to: 'Madurai', type: 'Heritage Tour' },
-  { from: 'Kanchipuram', to: 'Mahabalipuram', type: 'Coastal Heritage' },
-  { from: 'Kanchipuram', to: 'Yercaud', type: 'Hill Station' },
-  { from: 'Kanchipuram', to: 'Trichy', type: 'Central TN' },
-  { from: 'Kanchipuram', to: 'Thanjavur', type: 'Heritage Tour' },
+  // Karnataka Routes
+  { from: 'Kanchipuram', to: 'Bangalore', tag: 'Inter-State', categories: ['Inter-State', 'Weekend Trips', 'Family Trips'], distance: '280 km', time: '5.5 Hours', price: '₹7,200', iconType: 'compass' },
+  { from: 'Kanchipuram', to: 'Mysore', tag: 'Inter-State', categories: ['Inter-State', 'Heritage', 'Hill Stations', 'Weekend Trips'], distance: '410 km', time: '7.5 Hours', price: '₹9,800', iconType: 'landmark' },
+  { from: 'Kanchipuram', to: 'Coorg', tag: 'Hill Station', categories: ['Hill Stations', 'Inter-State', 'Adventure', 'Nature', 'Family Trips'], distance: '510 km', time: '9.5 Hours', price: '₹12,500', iconType: 'mountain' },
+  { from: 'Kanchipuram', to: 'Chikmagalur', tag: 'Nature Tour', categories: ['Nature', 'Hill Stations', 'Inter-State', 'Adventure'], distance: '520 km', time: '9.5 Hours', price: '₹12,800', iconType: 'trees' },
+  { from: 'Kanchipuram', to: 'Hampi', tag: 'Heritage', categories: ['Heritage', 'Inter-State', 'Adventure'], distance: '640 km', time: '11 Hours', price: '₹15,500', iconType: 'landmark' },
+  { from: 'Kanchipuram', to: 'Shivanasamudra', tag: 'Nature Falls', categories: ['Nature', 'Inter-State', 'Adventure'], distance: '380 km', time: '7 Hours', price: '₹9,200', iconType: 'trees' },
+  { from: 'Kanchipuram', to: 'Bandipur', tag: 'Wildlife Safari', categories: ['Nature', 'Adventure', 'Inter-State'], distance: '480 km', time: '8.5 Hours', price: '₹11,800', iconType: 'trees' },
+  { from: 'Kanchipuram', to: 'Nagarhole', tag: 'Nature & Wildlife', categories: ['Nature', 'Adventure', 'Inter-State'], distance: '520 km', time: '9.5 Hours', price: '₹12,800', iconType: 'trees' },
+
+  // Tamil Nadu Temple Destinations
+  { from: 'Kanchipuram', to: 'Tirupati', tag: 'Temple Trip', categories: ['Temple Tours', 'Pilgrimage', 'Inter-State', 'Weekend Trips', 'Family Trips'], distance: '110 km', time: '2.5 Hours', price: '₹3,500', iconType: 'sparkles' },
+  { from: 'Kanchipuram', to: 'Rameswaram', tag: 'Spiritual Tour', categories: ['Temple Tours', 'Pilgrimage', 'Heritage', 'Family Trips'], distance: '510 km', time: '8.5 Hours', price: '₹12,200', iconType: 'sparkles' },
+  { from: 'Kanchipuram', to: 'Madurai', tag: 'Heritage Tour', categories: ['Temple Tours', 'Pilgrimage', 'Heritage', 'Family Trips'], distance: '410 km', time: '6.5 Hours', price: '₹9,500', iconType: 'landmark' },
+  { from: 'Kanchipuram', to: 'Thanjavur', tag: 'Heritage Temple', categories: ['Temple Tours', 'Heritage', 'Pilgrimage'], distance: '290 km', time: '5 Hours', price: '₹7,200', iconType: 'landmark' },
+  { from: 'Kanchipuram', to: 'Chidambaram', tag: 'Spiritual Tour', categories: ['Temple Tours', 'Heritage', 'Pilgrimage'], distance: '190 km', time: '3.5 Hours', price: '₹5,200', iconType: 'sparkles' },
+  { from: 'Kanchipuram', to: 'Srirangam', tag: 'Temple Trip', categories: ['Temple Tours', 'Heritage', 'Pilgrimage'], distance: '280 km', time: '4.5 Hours', price: '₹6,800', iconType: 'sparkles' },
+  { from: 'Kanchipuram', to: 'Palani', tag: 'Pilgrimage Tour', categories: ['Temple Tours', 'Pilgrimage', 'Family Trips'], distance: '440 km', time: '7.5 Hours', price: '₹10,500', iconType: 'sparkles' },
+  { from: 'Kanchipuram', to: 'Velankanni', tag: 'Pilgrimage Trip', categories: ['Temple Tours', 'Pilgrimage', 'Coastal Heritage', 'Family Trips'], distance: '280 km', time: '5.5 Hours', price: '₹7,000', iconType: 'sparkles' },
+  { from: 'Kanchipuram', to: 'Kanyakumari', tag: 'Coastal Pilgrimage', categories: ['Temple Tours', 'Pilgrimage', 'Beach', 'Family Trips'], distance: '650 km', time: '10.5 Hours', price: '₹15,200', iconType: 'umbrella' },
+
+  // Hill Stations
+  { from: 'Kanchipuram', to: 'Ooty', tag: 'Hill Station', categories: ['Hill Stations', 'Weekend Trips', 'Family Trips', 'Nature'], distance: '500 km', time: '9 Hours', price: '₹12,000', iconType: 'mountain' },
+  { from: 'Kanchipuram', to: 'Kodaikanal', tag: 'Hill Station', categories: ['Hill Stations', 'Weekend Trips', 'Family Trips', 'Nature'], distance: '470 km', time: '8.5 Hours', price: '₹11,500', iconType: 'mountain' },
+  { from: 'Kanchipuram', to: 'Yercaud', tag: 'Hill Station', categories: ['Hill Stations', 'Weekend Trips', 'Family Trips'], distance: '310 km', time: '5.5 Hours', price: '₹7,800', iconType: 'mountain' },
+  { from: 'Kanchipuram', to: 'Valparai', tag: 'Hill Station', categories: ['Hill Stations', 'Nature', 'Adventure'], distance: '530 km', time: '9.5 Hours', price: '₹12,800', iconType: 'mountain' },
+  { from: 'Kanchipuram', to: 'Kotagiri', tag: 'Hill Station', categories: ['Hill Stations', 'Nature'], distance: '480 km', time: '8.5 Hours', price: '₹11,800', iconType: 'mountain' },
+  { from: 'Kanchipuram', to: 'Coonoor', tag: 'Hill Station', categories: ['Hill Stations', 'Nature', 'Family Trips'], distance: '485 km', time: '8.5 Hours', price: '₹11,800', iconType: 'mountain' },
+  { from: 'Kanchipuram', to: 'Kolli Hills', tag: 'Adventure Hill', categories: ['Hill Stations', 'Adventure', 'Nature'], distance: '320 km', time: '6 Hours', price: '₹8,000', iconType: 'mountain' },
+  { from: 'Kanchipuram', to: 'Meghamalai', tag: 'Misty Mountains', categories: ['Hill Stations', 'Nature', 'Adventure'], distance: '510 km', time: '9 Hours', price: '₹12,200', iconType: 'mountain' },
+
+  // Beach & Heritage
+  { from: 'Kanchipuram', to: 'Mahabalipuram', tag: 'Coastal Heritage', categories: ['Beach', 'Heritage', 'Weekend Trips'], distance: '65 km', time: '1.5 Hours', price: '₹2,200', iconType: 'umbrella' },
+  { from: 'Kanchipuram', to: 'Pondicherry', tag: 'ECR Coastal Road', categories: ['Beach', 'Weekend Trips', 'Family Trips'], distance: '115 km', time: '2.5 Hours', price: '₹3,500', iconType: 'umbrella' },
+  { from: 'Kanchipuram', to: 'Nagapattinam', tag: 'Coastal Heritage', categories: ['Beach', 'Heritage', 'Pilgrimage'], distance: '275 km', time: '5.5 Hours', price: '₹6,800', iconType: 'umbrella' },
+  { from: 'Kanchipuram', to: 'Poompuhar', tag: 'Heritage Coastal', categories: ['Beach', 'Heritage'], distance: '235 km', time: '4.5 Hours', price: '₹6,000', iconType: 'landmark' },
+  { from: 'Kanchipuram', to: 'Marina Beach', tag: 'Chennai City', categories: ['Beach', 'Weekend Trips'], distance: '75 km', time: '2 Hours', price: '₹2,500', iconType: 'umbrella' },
+  { from: 'Kanchipuram', to: 'Dhanushkodi', tag: 'Island Beach', categories: ['Beach', 'Adventure', 'Heritage'], distance: '530 km', time: '9.5 Hours', price: '₹13,000', iconType: 'umbrella' },
+
+  // Nature & Adventure
+  { from: 'Kanchipuram', to: 'Hogenakkal Falls', tag: 'Waterfalls Tour', categories: ['Nature', 'Adventure', 'Weekend Trips'], distance: '280 km', time: '5.5 Hours', price: '₹7,200', iconType: 'trees' },
+  { from: 'Kanchipuram', to: 'Yelagiri', tag: 'Hill & Nature', categories: ['Nature', 'Hill Stations', 'Weekend Trips'], distance: '180 km', time: '3.5 Hours', price: '₹4,800', iconType: 'trees' },
+  { from: 'Kanchipuram', to: 'Topslip', tag: 'Forest Safari', categories: ['Nature', 'Adventure'], distance: '510 km', time: '9 Hours', price: '₹12,200', iconType: 'trees' },
+  { from: 'Kanchipuram', to: 'Mudumalai', tag: 'Wildlife Sanctuary', categories: ['Nature', 'Adventure'], distance: '510 km', time: '9 Hours', price: '₹12,200', iconType: 'trees' },
+  { from: 'Kanchipuram', to: 'Anamalai', tag: 'Tiger Reserve', categories: ['Nature', 'Adventure'], distance: '520 km', time: '9.5 Hours', price: '₹12,500', iconType: 'trees' },
+  { from: 'Kanchipuram', to: 'Kalrayan Hills', tag: 'Adventure Trek', categories: ['Nature', 'Adventure', 'Hill Stations'], distance: '260 km', time: '5 Hours', price: '₹6,500', iconType: 'mountain' },
+
+  // Airport Routes
+  { from: 'Kanchipuram', to: 'Chennai Airport', tag: 'Local Pickup/Drop', categories: ['Airport Transfer'], distance: '60 km', time: '1.5 Hours', price: '₹1,800', iconType: 'plane' },
+  { from: 'Kanchipuram', to: 'Bengaluru Airport', tag: 'Airport Pickup/Drop', categories: ['Airport Transfer', 'Inter-State'], distance: '300 km', time: '6 Hours', price: '₹7,800', iconType: 'plane' },
+  { from: 'Kanchipuram', to: 'Coimbatore Airport', tag: 'Airport Pickup/Drop', categories: ['Airport Transfer'], distance: '440 km', time: '7.5 Hours', price: '₹10,500', iconType: 'plane' }
 ];
 
 const features = [
@@ -273,6 +330,8 @@ export default function TravelsWebsite() {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [whyChooseUsVisible, setWhyChooseUsVisible] = useState(() => typeof window !== 'undefined' && !window.IntersectionObserver);
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Amenities list
   const amenities = [
@@ -418,11 +477,33 @@ export default function TravelsWebsite() {
     ? galleryItems.slice(0, 4) 
     : galleryItems;
 
+  const renderRouteIcon = (type) => {
+    switch (type) {
+      case 'compass': return <Compass size={18} />;
+      case 'mountain': return <Mountain size={18} />;
+      case 'trees': return <Trees size={18} />;
+      case 'sparkles': return <Sparkles size={18} />;
+      case 'beach':
+      case 'umbrella': return <Umbrella size={18} />;
+      case 'landmark': return <Landmark size={18} />;
+      case 'plane': return <Plane size={18} />;
+      default: return <MapPin size={18} />;
+    }
+  };
+
+  const filteredRoutes = routes.filter(route => {
+    const matchesCategory = activeCategory === 'All' || route.categories.includes(activeCategory);
+    const matchesSearch = route.to.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          route.tag.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          route.categories.some(c => c.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
+
   return (
     <div className="main-wrapper">
       {/* Floating WhatsApp */}
       <a href={WA_LINK} target="_blank" rel="noreferrer" className="floating-whatsapp" aria-label="WhatsApp">
-        <MessageCircle size={28} />
+        <WhatsAppIcon size={28} />
       </a>
 
       {/* Navbar */}
@@ -430,7 +511,7 @@ export default function TravelsWebsite() {
         <div className="container">
           <div className="logo" onClick={() => goTo('home')}>ROYAL<span>TRAVELS</span></div>
           <div className={`nav-links${isMenuOpen ? ' mobile-active' : ''}`}>
-            {['home','about','vehicles','packages','services','gallery','routes','contact'].map(id => (
+            {['home','about','vehicles','packages','services','routes','gallery','contact'].map(id => (
               <a key={id} href={`#${id}`}
                 onClick={e => { e.preventDefault(); goTo(id); }}
                 className={['packages', 'services'].includes(id) ? 'hide-mobile-nav' : ''}
@@ -441,7 +522,7 @@ export default function TravelsWebsite() {
           </div>
           <div className="nav-actions">
             <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-whatsapp hide-mobile">
-              <MessageCircle size={17} /> WhatsApp
+              <WhatsAppIcon size={17} /> WhatsApp
             </a>
             <button className="mobile-toggle" onClick={() => setIsMenuOpen(o => !o)} aria-label="Menu">
               {isMenuOpen ? <X size={27} /> : <Menu size={27} />}
@@ -491,8 +572,8 @@ export default function TravelsWebsite() {
                 <p>Call or WhatsApp us directly for quick booking confirmation.</p>
               </div>
               <div className="contact-cta-btns">
-                <a href={WA_LINK} target="_blank" rel="noreferrer" className="contact-btn-wa">
-                  <MessageCircle size={22} /> WhatsApp Now
+                <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn btn-whatsapp hide-mobile">
+                  <WhatsAppIcon size={22} className="wa-icon" /> WhatsApp Now
                 </a>
                 <a href={PHONE} className="contact-btn-call">
                   <Phone size={22} /> Call Now
@@ -659,42 +740,6 @@ export default function TravelsWebsite() {
         </div>
       </section>
 
-      {/* Popular Routes */}
-      <section id="routes">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-subtitle">Destinations</span>
-            <h2 className="section-title">Most Popular Routes</h2>
-          </div>
-          <div className="routes-grid-new">
-            {routes.slice(0, showAllRoutes ? routes.length : 12).map((r, i) => (
-              <div key={i} className={`route-card-new card-lift scroll-reveal ${!showAllRoutes && i >= 4 ? 'mobile-hidden' : ''}`} onClick={() => goTo('home')}>
-                <div className="route-dot"></div>
-                <div className="route-details"><h4>{r.from} → {r.to}</h4><p>{r.type}</p></div>
-                <ArrowRight className="route-arrow" size={17} />
-              </div>
-            ))}
-          </div>
-          
-          {!showAllRoutes && (
-            <div className="view-more-container mobile-only" style={{ marginTop: '1.5rem' }}>
-              <button className="btn btn-outline w-100" onClick={() => setShowAllRoutes(true)}>
-                View More Routes <ChevronRight size={17} />
-              </button>
-            </div>
-          )}
-
-          <div className="pickup-areas scroll-reveal">
-            <h4>Major Pickup Areas:</h4>
-            <div className="area-tags">
-              {['Kanchipuram', 'Sriperumbudur', 'Walajabad', 'Chengalpattu', 'Oragadam', 'Uthiramerur', 'Chennai Airport'].map(area => (
-                <span key={area} className="area-tag"><MapPin size={14} /> {area}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Services */}
       <section id="services" className="hide-mobile" style={{ background: 'var(--navy)', color: 'var(--white)' }}>
         <div className="container">
@@ -719,6 +764,93 @@ export default function TravelsWebsite() {
                 <div className="s-link" onClick={() => goTo('home')}>Book Now <ChevronRight size={15} /></div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Routes */}
+      <section id="routes">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-subtitle">Destinations</span>
+            <h2 className="section-title">Most Popular Routes</h2>
+          </div>
+          
+          <div className="route-controls scroll-reveal">
+            <div className="route-search-wrapper">
+              <Search className="search-icon" size={18} />
+              <input 
+                type="text" 
+                placeholder="Search destination..." 
+                className="route-search-input"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            
+            <div className="route-filters-wrapper">
+              <div className="route-filters">
+                {routeCategoriesList.map(category => (
+                  <button 
+                    key={category} 
+                    className={`filter-btn ${activeCategory === category ? 'active' : ''}`}
+                    onClick={() => setActiveCategory(category)}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {filteredRoutes.length > 0 ? (
+            <div className="routes-grid-new">
+              {filteredRoutes.slice(0, showAllRoutes ? filteredRoutes.length : 8).map((r, i) => (
+                <div key={i} className="route-card-premium card-lift">
+                  <div className="r-card-header">
+                    <div className="r-icon-box">{renderRouteIcon(r.iconType)}</div>
+                    <span className="r-tag">🏷 {r.tag}</span>
+                  </div>
+                  <h4 className="r-title">📍 {r.from} → {r.to}</h4>
+                  <div className="r-specs">
+                    <span>🛣 {r.distance}</span>
+                    <span>⏱ {r.time}</span>
+                  </div>
+                  <div className="r-footer" style={{ justifyContent: 'center' }}>
+                    <button className="btn-book-sm" style={{ width: '100%' }} onClick={() => {
+                      const msg = `Hi Royal Travels, I want to book a cab from ${r.from} to ${r.to} (${r.distance}, ~${r.time}). Please share details and confirm availability.`;
+                      window.open(`https://wa.me/919384501016?text=${encodeURIComponent(msg)}`, '_blank');
+                    }}>Book Now →</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="routes-empty-state">
+              <div className="empty-icon"><Compass size={48} /></div>
+              <h3>No routes found.</h3>
+              <p>Try another destination or category.</p>
+              <button className="btn btn-outline" onClick={() => { setSearchQuery(''); setActiveCategory('All'); }}>
+                Reset Filters
+              </button>
+            </div>
+          )}
+          
+          {!showAllRoutes && filteredRoutes.length > 8 && (
+            <div className="view-more-container" style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+              <button className="btn btn-outline" style={{ display: 'inline-flex', padding: '0.8rem 2rem' }} onClick={() => setShowAllRoutes(true)}>
+                View All {filteredRoutes.length} Routes <ChevronRight size={17} />
+              </button>
+            </div>
+          )}
+
+          <div className="pickup-areas scroll-reveal" style={{ marginTop: '4rem' }}>
+            <h4>Major Pickup Areas:</h4>
+            <div className="area-tags">
+              {['Kanchipuram', 'Sriperumbudur', 'Walajabad', 'Chengalpattu', 'Oragadam', 'Uthiramerur', 'Chennai Airport'].map(area => (
+                <span key={area} className="area-tag"><MapPin size={14} /> {area}</span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -795,7 +927,9 @@ export default function TravelsWebsite() {
               <div className="social-footer">
                 <a href={PHONE}><Phone size={19} /></a>
                 <a href="mailto:info@royaltravels.com"><Mail size={19} /></a>
-                <a href={WA_LINK} target="_blank" rel="noreferrer"><MessageCircle size={19} /></a>
+              </div>
+              <div className="social-links">
+                <a href={WA_LINK} target="_blank" rel="noreferrer"><WhatsAppIcon size={19} /></a>
               </div>
             </div>
             <div className="footer-links">
@@ -870,7 +1004,7 @@ export default function TravelsWebsite() {
                   const msg = `Hi Royal Travels, I want to book the "${selectedPackage.title}" package.\n- Places: ${selectedPackage.places.join(', ')}\n- Duration: ${selectedPackage.duration}\n\nPlease share availability and quote.`;
                   window.open(`https://wa.me/919384501016?text=${encodeURIComponent(msg)}`, '_blank');
                 }}>
-                  <MessageCircle size={18} /> Book Now via WhatsApp
+                  <WhatsAppIcon size={18} /> Book Now via WhatsApp
                 </button>
               </div>
             </div>
