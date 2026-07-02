@@ -668,42 +668,6 @@ export default function TravelsWebsite() {
         </div>
       </section>
 
-      {/* Popular Routes */}
-      <section id="routes">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-subtitle">Destinations</span>
-            <h2 className="section-title">Most Popular Routes</h2>
-          </div>
-          <div className="routes-grid-new">
-            {routes.slice(0, showAllRoutes ? routes.length : 12).map((r, i) => (
-              <div key={i} className={`route-card-new card-lift scroll-reveal ${!showAllRoutes && i >= 4 ? 'mobile-hidden' : ''}`} onClick={() => goTo('home')}>
-                <div className="route-dot"></div>
-                <div className="route-details"><h4>{r.from} → {r.to}</h4><p>{r.type}</p></div>
-                <ArrowRight className="route-arrow" size={17} />
-              </div>
-            ))}
-          </div>
-          
-          {!showAllRoutes && (
-            <div className="view-more-container mobile-only" style={{ marginTop: '1.5rem' }}>
-              <button className="btn btn-outline w-100" onClick={() => setShowAllRoutes(true)}>
-                View More Routes <ChevronRight size={17} />
-              </button>
-            </div>
-          )}
-
-          <div className="pickup-areas scroll-reveal">
-            <h4>Major Pickup Areas:</h4>
-            <div className="area-tags">
-              {['Kanchipuram', 'Sriperumbudur', 'Walajabad', 'Chengalpattu', 'Oragadam', 'Uthiramerur', 'Chennai Airport'].map(area => (
-                <span key={area} className="area-tag"><MapPin size={14} /> {area}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Services */}
       <section id="services" style={{ background: 'var(--navy)', color: 'var(--white)' }}>
         <div className="container">
