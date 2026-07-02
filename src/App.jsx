@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Car, Users, Clock, ShieldCheck, MapPin, Phone, Mail,
   CheckCircle2, ChevronRight, ChevronLeft, Plane, Home,
   Briefcase, Star, Navigation, ArrowRight, Menu, X,
   Gem, Zap, Heart, Search, Compass, Mountain, Sun, Trees, Sparkles, Filter, Calendar, Umbrella, Landmark
 } from 'lucide-react';
-
-const WhatsAppIcon = ({ size = 24, className = '' }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width={size} 
-    height={size} 
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-  >
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-  </svg>
-);
 
 const vehicleList = [
   { id: 1, name: 'White Sedan Car', capacity: '4 Seater', bestFor: 'Swift Dzire / Etios', price: '₹12', tag: 'Sedan',
@@ -136,19 +123,6 @@ const routes = [
   { from: 'Kanchipuram', to: 'Coimbatore Airport', tag: 'Airport Pickup/Drop', categories: ['Airport Transfer'], distance: '440 km', time: '7.5 Hours', price: '₹10,500', iconType: 'plane' }
 ];
 
-const features = [
-  { title: 'Tamil Nadu Experienced Drivers', icon: <Zap />, desc: 'Local experts with deep knowledge of TN roads.' },
-  { title: 'Hill Station Driving Experience', icon: <ShieldCheck />, desc: 'Safe & skilled drivers for Ooty, Kodaikanal, etc.' },
-  { title: 'Doorstep Pickup & Drop', icon: <MapPin />, desc: 'Convenient pickup from your home or office.' },
-  { title: 'Ladies Safety Assurance', icon: <ShieldCheck />, desc: 'Verified drivers & tracking for safe female travel.' },
-  { title: 'On-Time Pickup Guarantee', icon: <Clock />, desc: 'Punctuality is our core promise.' },
-  { title: 'Clean & Safe Family Travel', icon: <ShieldCheck />, desc: 'Fully sanitized premium white vehicles.' },
-  { title: 'Group Travel Experts', icon: <Users />, desc: 'Perfectly managed tours for large families & groups.' },
-  { title: 'Long Distance Expertise', icon: <Navigation />, desc: 'Comfortable & safe driving for 500+ km trips.' },
-  { title: 'Affordable Packages', icon: <Navigation />, desc: 'Best rates for all Tamil Nadu tours.' },
-  { title: '24/7 Support', icon: <Phone />, desc: 'Round the clock assistance for your journey.' },
-];
-
 const packagesList = [
   {
     id: 1,
@@ -164,8 +138,8 @@ const packagesList = [
     id: 2,
     title: 'Temple Tours',
     img: 'https://images.pexels.com/photos/2161467/pexels-photo-2161467.jpeg?auto=compress&cs=tinysrgb&w=800',
-    englishDesc: 'Visit famous Tamil Nadu temples with safe and comfortable travel arrangements.',
-    tamilDesc: 'தமிழ்நாட்டின் பிரசித்தி பெற்ற கோவில்களுக்கு பாதுகாப்பான மற்றும் சுகமான பயண வசதியுடன் செல்லலாம்.',
+    englishDesc: 'Visit famous South India temples with safe and comfortable temple tour arrangements.',
+    tamilDesc: 'தென்னிந்தியாவின் பிரசித்தி பெற்ற கோவில்களுக்கு பாதுகாப்பான மற்றும் சுகமான பயண வசதியுடன் செல்லலாம்.',
     places: ['Madurai', 'Rameswaram', 'Thanjavur', 'Kanchipuram'],
     bestFor: 'Family, Devotional Trips',
     duration: '1–3 Days'
@@ -205,39 +179,6 @@ const packagesList = [
 const WA_LINK = 'https://wa.me/919384501016?text=Hi%20I%20want%20to%20book%20a%20car%20or%20van';
 const PHONE   = 'tel:+919384501016';
 
-const ChargingIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-    <line x1="12" y1="18" x2="12" y2="22" />
-    <line x1="9" y1="18" x2="15" y2="18" />
-    <path d="M12 7l-2 4h4l-2 4" fill="currentColor" />
-  </svg>
-);
-
-const WashroomIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="8" cy="5" r="2.5" />
-    <path d="M8 8c-1.5 0-3 1.2-3 2.8v5.2h1.5v5h3v-5H11V10.8C11 9.2 9.5 8 8 8z" />
-    <circle cx="16" cy="5" r="2.5" />
-    <path d="M16 8c-1.5 0-3 1.2-3 2.8v4.2h1.5v6h3v-6H19V10.8C19 9.2 17.5 8 16 8z" />
-  </svg>
-);
-
-const PillowIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 6h18a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
-    <path d="M3 13h18a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2z" />
-  </svg>
-);
-
-const WifiIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 12.55a11 11 0 0 1 14.08 0" />
-    <path d="M1.42 9a16 16 0 0 1 21.16 0" />
-    <path d="M8.53 16.1a6 6 0 0 1 6.94 0" />
-    <line x1="12" y1="20" x2="12.01" y2="20" strokeWidth="3" />
-  </svg>
-);
 
 const SkylineSVG = () => (
   <svg className="skyline-svg" viewBox="0 0 1200 120" preserveAspectRatio="none" fill="none" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1.2" xmlns="http://www.w3.org/2000/svg">
@@ -325,20 +266,23 @@ export default function TravelsWebsite() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showAllRoutes, setShowAllRoutes] = useState(false);
-  const [showAllFeatures, setShowAllFeatures] = useState(false);
   const [showAllGallery, setShowAllGallery] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [whyChooseUsVisible, setWhyChooseUsVisible] = useState(() => typeof window !== 'undefined' && !window.IntersectionObserver);
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
 
   // Amenities list
   const amenities = [
-    { title: "Charging Point", desc: "USB & power charging points available for your devices.", icon: <ChargingIcon /> },
-    { title: "Clean Washroom", desc: "Hygienic and well-maintained washrooms for your comfort.", icon: <WashroomIcon /> },
-    { title: "Pillow & Blanket", desc: "Soft pillow and clean blankets for a relaxed journey.", icon: <PillowIcon /> },
-    { title: "WiFi", desc: "High-speed WiFi to keep you connected throughout your journey.", icon: <WifiIcon /> }
+    { title: "Tamil Nadu Experienced Drivers", desc: "Local experts with deep knowledge of TN roads.", icon: <Zap size={32} /> },
+    { title: "Hill Station Driving Experience", desc: "Safe & skilled drivers for Ooty, Kodaikanal, etc.", icon: <ShieldCheck size={32} /> },
+    { title: "Doorstep Pickup & Drop", desc: "Convenient pickup from your home or office.", icon: <MapPin size={32} /> },
+    { title: "Ladies Safety Assurance", desc: "Verified drivers & tracking for safe female travel.", icon: <ShieldCheck size={32} /> },
+    { title: "On-Time Pickup Guarantee", desc: "Punctuality is our core promise.", icon: <Clock size={32} /> },
+    { title: "Clean & Safe Family Travel", desc: "Fully sanitized premium white vehicles.", icon: <ShieldCheck size={32} /> },
+    { title: "Group Travel Experts", desc: "Perfectly managed tours for large families & groups.", icon: <Users size={32} /> },
+    { title: "Long Distance Expertise", desc: "Comfortable & safe driving for 500+ km trips.", icon: <Navigation size={32} /> },
+    { title: "Affordable Packages", desc: "Best rates for all South India tours.", icon: <Navigation size={32} /> },
+    { title: "24/7 Support", desc: "Round the clock assistance for your journey.", icon: <Phone size={32} /> }
   ];
 
   // Carousel states
@@ -354,7 +298,7 @@ export default function TravelsWebsite() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setVisibleCards(1);
+        setVisibleCards(2);
       } else if (window.innerWidth < 1100) {
         setVisibleCards(2);
       } else {
@@ -440,24 +384,6 @@ export default function TravelsWebsite() {
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !window.IntersectionObserver) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setWhyChooseUsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const el = document.getElementById('about');
-    if (el) observer.observe(el);
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
     if (!isMenuOpen) return;
     const close = (e) => {
       if (!e.target.closest('.nav-links') && !e.target.closest('.mobile-toggle'))
@@ -509,12 +435,17 @@ export default function TravelsWebsite() {
       {/* Navbar */}
       <nav className={`navbar${isScrolled ? ' scrolled' : ''}`}>
         <div className="container">
-          <div className="logo" onClick={() => goTo('home')}>ROYAL<span>TRAVELS</span></div>
+          <div className="logo logo-img-wrap" onClick={() => goTo('home')}>
+            <img src={logoImg} alt="Royal Travels Kanchipuram" className="navbar-logo-img" />
+            <div className="brand-name">
+              <span className="brand-royal">ROYAL</span>
+              <span className="brand-travels">TRAVELS</span>
+            </div>
+          </div>
           <div className={`nav-links${isMenuOpen ? ' mobile-active' : ''}`}>
             {['home','about','vehicles','packages','services','routes','gallery','contact'].map(id => (
               <a key={id} href={`#${id}`}
                 onClick={e => { e.preventDefault(); goTo(id); }}
-                className={['packages', 'services'].includes(id) ? 'hide-mobile-nav' : ''}
               >
                 {id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
@@ -536,7 +467,7 @@ export default function TravelsWebsite() {
         <div className="hero-bg-wrapper">
           <img 
             src="/images/hero/hero_tn_road.webp" 
-            alt="Tamil Nadu Road" 
+            alt="South India Road" 
             fetchpriority="high"
             className="hero-bg-img"
             onError={(e) => {
@@ -549,9 +480,13 @@ export default function TravelsWebsite() {
         <div className="container">
           <div className="hero-content">
             <div className="hero-text">
-              <div className="premium-badge"><Gem size={14} /> All Over Tamil Nadu Travel Service</div>
-              <h1>Book Clean &amp; Comfortable Cars and Vans Across Tamil Nadu</h1>
-              <p>Book clean and comfortable cars, vans, and tempo travellers for local trips, outstation trips, hill stations, temple tours, airport pickup, and family tours across Tamil Nadu.</p>
+              <h2 className="hero-brand-title">ROYAL TRAVELS</h2>
+              <div className="hero-brand-logo-wrap">
+                <img src={logoImg} alt="Royal Travels Kanchipuram" className="hero-brand-logo" />
+              </div>
+              <div className="premium-badge"><Gem size={14} /> All Over South India Travel Service</div>
+              <h1>Book Clean &amp; Comfortable Cars and Vans Across South India</h1>
+              <p>Travel comfortably across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Puducherry with Royal Travels. We provide clean cars, spacious vans, and tempo travellers for local trips, outstation journeys, airport transfers, temple tours, business travel, family vacations, and tourist destinations with professional drivers and 24/7 customer support.</p>
               <div className="hero-trust-badges">
                 <div className="trust-item"><CheckCircle2 size={15} /> 500+ Happy Customers</div>
                 <div className="trust-item"><CheckCircle2 size={15} /> 24/7 Support</div>
@@ -590,7 +525,7 @@ export default function TravelsWebsite() {
                 </div>
                 <div className="contact-info-row">
                   <div className="contact-info-icon"><Car size={18} /></div>
-                  <div><span className="contact-info-label">Services</span><span className="contact-info-value">Car, Van, Outstation, Airport Pickup</span></div>
+                  <div><span className="contact-info-label">Services</span><span className="contact-info-value">Car Rental, Van Rental, Tempo Traveller, Outstation Tours, Airport Transfers</span></div>
                 </div>
               </div>
             </div>
@@ -598,21 +533,14 @@ export default function TravelsWebsite() {
         </div>
       </header>
 
-      {/* Why Choose Us */}
+      {/* Our Premium Amenities */}
       <section id="about" className="why-choose-us-section">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-subtitle">Why Choose Us</span>
-            <h2 className="section-title">Experience Premium Travel</h2>
-          </div>
-        </div>
-
         {/* Full-width premium amenities showcase container */}
         <div className="amenities-showcase-wrapper">
           <div className="container amenities-container">
             <div className="amenities-left">
               <h3 className="amenities-title">
-                Our<br />Premium<br /><span className="highlight-yellow">Amenities</span>
+                Why<br />Choose<br /><span className="highlight-yellow">Us</span>
               </h3>
               <div className="vertical-divider"></div>
             </div>
@@ -717,7 +645,7 @@ export default function TravelsWebsite() {
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">Special Tours</span>
-            <h2 className="section-title">Tamil Nadu Tourist Packages</h2>
+            <h2 className="section-title">South India Tourist Packages</h2>
           </div>
           <div className="packages-grid">
             {packagesList.map((p) => (
@@ -740,23 +668,59 @@ export default function TravelsWebsite() {
         </div>
       </section>
 
+      {/* Popular Routes */}
+      <section id="routes">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-subtitle">Destinations</span>
+            <h2 className="section-title">Most Popular Routes</h2>
+          </div>
+          <div className="routes-grid-new">
+            {routes.slice(0, showAllRoutes ? routes.length : 12).map((r, i) => (
+              <div key={i} className={`route-card-new card-lift scroll-reveal ${!showAllRoutes && i >= 4 ? 'mobile-hidden' : ''}`} onClick={() => goTo('home')}>
+                <div className="route-dot"></div>
+                <div className="route-details"><h4>{r.from} → {r.to}</h4><p>{r.type}</p></div>
+                <ArrowRight className="route-arrow" size={17} />
+              </div>
+            ))}
+          </div>
+          
+          {!showAllRoutes && (
+            <div className="view-more-container mobile-only" style={{ marginTop: '1.5rem' }}>
+              <button className="btn btn-outline w-100" onClick={() => setShowAllRoutes(true)}>
+                View More Routes <ChevronRight size={17} />
+              </button>
+            </div>
+          )}
+
+          <div className="pickup-areas scroll-reveal">
+            <h4>Major Pickup Areas:</h4>
+            <div className="area-tags">
+              {['Kanchipuram', 'Sriperumbudur', 'Walajabad', 'Chengalpattu', 'Oragadam', 'Uthiramerur', 'Chennai Airport'].map(area => (
+                <span key={area} className="area-tag"><MapPin size={14} /> {area}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services */}
-      <section id="services" className="hide-mobile" style={{ background: 'var(--navy)', color: 'var(--white)' }}>
+      <section id="services" style={{ background: 'var(--navy)', color: 'var(--white)' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle" style={{ color: 'var(--gold)' }}>Services</span>
-            <h2 className="section-title" style={{ color: 'var(--white)' }}>Trusted Tamil Nadu Travel Service</h2>
+            <h2 className="section-title" style={{ color: 'var(--white)' }}>Trusted South India Travel Service</h2>
           </div>
           <div className="services-grid-premium">
             {[
-              { title: 'All TN Outstation Trips', icon: <Navigation />, desc: 'Safe travel across all major Tamil Nadu cities.' },
+              { title: 'Car & Van Rental Across South India', icon: <Navigation />, desc: 'Premium car rental across South India and van rental across South India for one way & round trip travel.' },
               { title: 'Hill Station Travel', icon: <Home />, desc: 'Expert driving on winding mountain roads like Ooty & Kodaikanal.' },
-              { title: 'Temple Tour Packages', icon: <Star />, desc: 'Spiritual journeys to Madurai, Rameswaram, and Thanjavur.' },
-              { title: 'Family & School Tours', icon: <Users />, desc: 'Comfortable vans for group and educational trips.' },
-              { title: 'Wedding & Events', icon: <Star />, desc: 'Premium white cars for special functions.' },
-              { title: 'Airport Pickup & Drop', icon: <Plane />, desc: 'Reliable transfers for Chennai & other TN airports.' },
-              { title: 'Corporate Travel', icon: <Briefcase />, desc: 'Professional service for business clients.' },
-              { title: 'Safe & Comfortable', icon: <ShieldCheck />, desc: 'Well-maintained fleet for peace of mind.' },
+              { title: 'Temple Tour Packages', icon: <Star />, desc: 'Spiritual devotional journeys to Madurai, Rameswaram, Tirupati, and Thanjavur.' },
+              { title: 'Family & Group Tours', icon: <Users />, desc: 'Comfortable vans for group tours and custom family tour packages.' },
+              { title: 'Tempo Traveller Rental', icon: <Star />, desc: 'Spacious tempo traveller rental for large groups, wedding parties, and events.' },
+              { title: 'Airport Transfer Service', icon: <Plane />, desc: 'Reliable airport transfer service for Chennai, Bangalore, and other major South India airports.' },
+              { title: 'Corporate Travel', icon: <Briefcase />, desc: 'Professional service for business travel and corporate clients.' },
+              { title: 'Outstation Taxi Service', icon: <ShieldCheck />, desc: 'Well-maintained fleet offering reliable outstation taxi service with peace of mind.' },
             ].map((s, i) => (
               <div key={i} className="service-card-premium scroll-reveal">
                 <div className="s-icon">{s.icon}</div>
@@ -856,7 +820,7 @@ export default function TravelsWebsite() {
       </section>
 
       {/* Testimonials */}
-      <section className="hide-mobile">
+      <section>
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">Reviews</span>
@@ -889,7 +853,7 @@ export default function TravelsWebsite() {
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">Gallery</span>
-            <h2 className="section-title">Real Travel Moments in Tamil Nadu</h2>
+            <h2 className="section-title">Real Travel Moments in South India</h2>
           </div>
           <div className="gallery-grid">
             {activeGalleryItems.map((item, idx) => (
@@ -918,46 +882,118 @@ export default function TravelsWebsite() {
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="footer">
+      <footer id="contact" className="footer scroll-reveal">
         <div className="container">
-          <div className="footer-grid">
-            <div>
-              <div className="footer-logo">ROYAL<span>TRAVELS</span></div>
-              <p>Your trusted partner for premium car and van rentals. Quality service since 2010.</p>
-              <div className="social-footer">
-                <a href={PHONE}><Phone size={19} /></a>
-                <a href="mailto:info@royaltravels.com"><Mail size={19} /></a>
-              </div>
-              <div className="social-links">
-                <a href={WA_LINK} target="_blank" rel="noreferrer"><WhatsAppIcon size={19} /></a>
+          {/* Newsletter Box */}
+          <div className="footer-newsletter-box">
+            <div className="newsletter-text">
+              <h3>Stay Updated</h3>
+              <p>Subscribe to receive exclusive travel offers and route updates across Tamil Nadu.</p>
+            </div>
+            <form className="newsletter-form" onSubmit={(e) => { e.preventDefault(); alert('Thank you for subscribing to Royal Travels!'); }}>
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit" className="btn btn-gold">Subscribe <ArrowRight size={16} /></button>
+            </form>
+          </div>
+
+          {/* 4-Column Responsive Grid */}
+          <div className="footer-grid-4col">
+            {/* Column 1: LOGO & ABOUT */}
+            <div className="footer-col company-col">
+              <div className="footer-logo" onClick={() => goTo('home')}>ROYAL<span>TRAVELS</span></div>
+              <p className="footer-about-text">
+                Your trusted partner for premium car and van rentals across Tamil Nadu and South India. Safe, comfortable, and reliable travel service since 2010.
+              </p>
+              <div className="social-footer-icons">
+                <a href={PHONE} aria-label="Call"><Phone size={18} /></a>
+                <a href={WA_LINK} target="_blank" rel="noreferrer" aria-label="WhatsApp"><WhatsAppIcon size={18} /></a>
+                <a href="mailto:info@royaltravels.com" aria-label="Email"><Mail size={18} /></a>
+                <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><Facebook size={18} /></a>
+                <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={18} /></a>
               </div>
             </div>
-            <div className="footer-links">
+
+            {/* Column 2: QUICK LINKS */}
+            <div className="footer-col links-col">
               <h4>Quick Links</h4>
-              <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">Why Choose Us</a></li>
-                <li><a href="#vehicles">Our Vehicles</a></li>
-                <li><a href="#services">Services</a></li>
+              <ul className="footer-links-list">
+                <li><a href="#home" onClick={e => { e.preventDefault(); goTo('home'); }}><ChevronRight size={14} className="f-link-arrow" /> Home</a></li>
+                <li><a href="#about" onClick={e => { e.preventDefault(); goTo('about'); }}><ChevronRight size={14} className="f-link-arrow" /> About Us</a></li>
+                <li><a href="#vehicles" onClick={e => { e.preventDefault(); goTo('vehicles'); }}><ChevronRight size={14} className="f-link-arrow" /> Our Vehicles</a></li>
+                <li><a href="#services" onClick={e => { e.preventDefault(); goTo('services'); }}><ChevronRight size={14} className="f-link-arrow" /> Services</a></li>
+                <li><a href="#routes" onClick={e => { e.preventDefault(); goTo('routes'); }}><ChevronRight size={14} className="f-link-arrow" /> Popular Routes</a></li>
+                <li><a href="#contact" onClick={e => { e.preventDefault(); goTo('contact'); }}><ChevronRight size={14} className="f-link-arrow" /> Contact</a></li>
+                <li><a href="#about" onClick={e => { e.preventDefault(); goTo('about'); }}><ChevronRight size={14} className="f-link-arrow" /> FAQ</a></li>
               </ul>
             </div>
-            <div className="footer-links">
-              <h4>Contact Us</h4>
-              <ul className="contact-list">
-                <li><Phone size={15} className="text-gold" /> +91 93845 01016</li>
-                <li><Mail size={15} className="text-gold" /> info@royaltravels.com</li>
-                <li><MapPin size={15} className="text-gold" /> Chennai, Tamil Nadu, India</li>
+
+            {/* Column 3: POPULAR ROUTES */}
+            <div className="footer-col routes-col">
+              <h4>Popular Routes</h4>
+              <ul className="footer-routes-list">
+                <li><a href={WA_LINK} target="_blank" rel="noreferrer"><span>Kanchipuram</span> <ArrowRight size={13} className="route-arrow" /> <span>Chennai Airport</span></a></li>
+                <li><a href={WA_LINK} target="_blank" rel="noreferrer"><span>Kanchipuram</span> <ArrowRight size={13} className="route-arrow" /> <span>Tirupati</span></a></li>
+                <li><a href={WA_LINK} target="_blank" rel="noreferrer"><span>Kanchipuram</span> <ArrowRight size={13} className="route-arrow" /> <span>Bangalore</span></a></li>
+                <li><a href={WA_LINK} target="_blank" rel="noreferrer"><span>Kanchipuram</span> <ArrowRight size={13} className="route-arrow" /> <span>Pondicherry</span></a></li>
+                <li><a href={WA_LINK} target="_blank" rel="noreferrer"><span>Kanchipuram</span> <ArrowRight size={13} className="route-arrow" /> <span>Ooty</span></a></li>
+                <li><a href={WA_LINK} target="_blank" rel="noreferrer"><span>Kanchipuram</span> <ArrowRight size={13} className="route-arrow" /> <span>Coorg</span></a></li>
               </ul>
+            </div>
+
+            {/* Column 4: CONTACT DETAILS */}
+            <div className="footer-col contact-col">
+              <h4>Contact Details</h4>
+              <div className="footer-contact-details">
+                <div className="f-contact-row">
+                  <div className="f-icon"><Phone size={17} /></div>
+                  <div>
+                    <span className="f-label">Phone</span>
+                    <a href={PHONE} className="f-value">+91 93845 01016</a>
+                  </div>
+                </div>
+                <div className="f-contact-row">
+                  <div className="f-icon"><Mail size={17} /></div>
+                  <div>
+                    <span className="f-label">Email</span>
+                    <a href="mailto:info@royaltravels.com" className="f-value">info@royaltravels.com</a>
+                  </div>
+                </div>
+                <div className="f-contact-row">
+                  <div className="f-icon"><MapPin size={17} /></div>
+                  <div>
+                    <span className="f-label">Location</span>
+                    <span className="f-value">Kanchipuram, Tamil Nadu</span>
+                  </div>
+                </div>
+                <div className="f-contact-row">
+                  <div className="f-icon"><Clock size={17} /></div>
+                  <div>
+                    <span className="f-label">Working Hours</span>
+                    <span className="f-value">24×7 Available</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="footer-bottom">
+
+        {/* Footer Bottom Bar */}
+        <div className="footer-bottom-bar">
           <div className="container">
-            <div className="footer-bottom-container">
-              <p className="copyright-text">© 2026 Royal Travels. All rights reserved.</p>
-              <p className="thank-you-text">
-                Thank you for choosing Royal Travels <Heart size={14} className="gold-heart" fill="var(--gold)" color="var(--gold)" />
-              </p>
+            <div className="footer-bottom-grid">
+              <div className="f-bottom-left">
+                © 2026 Royal Travels. All Rights Reserved.
+              </div>
+              <div className="f-bottom-center">
+                Made with ❤️ in Tamil Nadu
+              </div>
+              <div className="f-bottom-right">
+                <a href="#privacy" onClick={e => e.preventDefault()}>Privacy Policy</a>
+                <span className="f-sep">•</span>
+                <a href="#terms" onClick={e => e.preventDefault()}>Terms & Conditions</a>
+                <span className="f-sep">•</span>
+                <a href="#refund" onClick={e => e.preventDefault()}>Refund Policy</a>
+              </div>
             </div>
           </div>
         </div>

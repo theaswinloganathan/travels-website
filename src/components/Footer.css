@@ -11,9 +11,24 @@
   margin-bottom: 60px;
 }
 
-.logo.white {
-  color: white;
+.footer-logo-wrap {
   margin-bottom: 20px;
+}
+
+.footer-logo-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+.footer-logo-img:hover {
+  transform: scale(1.06);
 }
 
 .footer-brand p {
